@@ -1,10 +1,13 @@
 package com.banck.account.service.impl;
 
 import com.banck.account.constant.AccountConstant;
+import com.banck.account.dto.AccountDto;
 import com.banck.account.dto.CustomerDto;
 import com.banck.account.entity.Accounts;
 import com.banck.account.entity.Customer;
 import com.banck.account.exception.CustomerAlreadyExistsException;
+import com.banck.account.exception.ResourceNotFoundException;
+import com.banck.account.mapper.AccountMapper;
 import com.banck.account.mapper.CustomerMapper;
 import com.banck.account.repo.AccountsRepository;
 import com.banck.account.repo.CustomerRepository;
@@ -19,9 +22,9 @@ import java.util.stream.Stream;
 
 @Service
 public class AccountsServiceImpl implements IAccountsService {
-@Autowired
+    @Autowired
     private CustomerRepository customerRepository;
-@Autowired
+    @Autowired
     private AccountsRepository accountsRepository;
 
     /**
@@ -33,8 +36,8 @@ public class AccountsServiceImpl implements IAccountsService {
         Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
 
         Optional<Customer> presentCustomer = this.customerRepository.findByMobileNumber(customer.getMobileNumber());
-        if(presentCustomer.isPresent()){
-            throw new CustomerAlreadyExistsException("Customer already register with given mobileNumber "+customer.getMobileNumber());
+        if (presentCustomer.isPresent()) {
+            throw new CustomerAlreadyExistsException("Customer already register with given mobileNumber " + customer.getMobileNumber());
         }
         customer.setCreatedAt(LocalDateTime.now());
         customer.setCreatedBy(customer.getName());
@@ -45,8 +48,7 @@ public class AccountsServiceImpl implements IAccountsService {
     }
 
     /**
-     *
-     * @param customer   create a new Account
+     * @param customer create a new Account
      * @return
      */
     private Accounts createNewAccount(Customer customer) {
@@ -69,7 +71,16 @@ public class AccountsServiceImpl implements IAccountsService {
 
     @Override
     public CustomerDto fetchAccount(String mobileNumber) {
-        return ;
+        Customer customer = this.customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "Mobile No", mobileNumber)
+        );
+        Accounts accounts = this.accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+                () -> new ResourceNotFoundException("Account", "Customer Id", String.valueOf(customer.getCustomerId()))
+        );
+        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
+        AccountDto accountDto = AccountMapper.mapToAccountsDto(accounts, new AccountDto());
+        customerDto.setAccountsDto(accountDto);
+        return customerDto;
     }
 
     /**
