@@ -12,6 +12,7 @@
     <artifactId>Loan</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Loan</name>
+    <packaging>jar</packaging>
     <description>Loan</description>
     <properties>
         <java.version>17</java.version>
@@ -68,7 +69,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
                 <configuration>
+                    <image>
+                        <name>atulpatel2001/loan:s4</name>
+                    </image>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
