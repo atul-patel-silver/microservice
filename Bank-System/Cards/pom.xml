@@ -84,7 +84,7 @@
 				<version>3.4.0</version>
 				<configuration>
 					<to>
-						<image>atulpatel2001/card:s4</image>
+						<image>atulpatel2001/cards:s4</image>
 					</to>
 				</configuration>
 			</plugin>

@@ -11,30 +11,30 @@ services:
     networks:
       - atulpatel2001
 
-#  loan:
-#    image: "atulpatel2001/loan:s4"
-#    container_name: "loan_ms"
-#    ports:
-#      - "8090:8090"
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 700m
-#    networks:
-#      - atulpatel2001
-#
-#  cards:
-#    image: "atulpatel2001/cards:s4"
-#    container_name: "cards_ms"
-#    ports:
-#      - "8091:8091"
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 700m
-#    networks:
-#      - atulpatel2001
-#
+  loan:
+    image: "atulpatel2001/loan:s4"
+    container_name: "loan_ms"
+    ports:
+      - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - atulpatel2001
+
+  cards:
+    image: "atulpatel2001/cards:s4"
+    container_name: "cards_ms"
+    ports:
+      - "8091:8091"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - atulpatel2001
+
 
 networks:
   atulpatel2001:
