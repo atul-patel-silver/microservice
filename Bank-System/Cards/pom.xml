@@ -16,7 +16,12 @@
 	<description>Cards</description>
 	<properties>
 		<java.version>17</java.version>
+		<dockerhub.username>atulpatel2001</dockerhub.username>
+		<dockerhub.password>atul@2001</dockerhub.password>
 	</properties>
+
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,26 +73,40 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
+
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.4.0</version>
 				<configuration>
-					<to>
-						<image>atulpatel2001/cards:s4</image>
-					</to>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
+					<plugin>
+							<groupId>com.google.cloud.tools</groupId>
+							<artifactId>jib-maven-plugin</artifactId>
+							<version>3.3.2</version>
+							<configuration>
+								<to>
+									<image>atulpatel2001/${project.artifactId}:s6</image>
+									<auth>
+										<username>atulpatel2001</username>
+										<password>atul@2001</password>
+									</auth>
+								</to>
+							</configuration>
+
+					</plugin>
+
 		</plugins>
 	</build>
 

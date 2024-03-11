@@ -5,8 +5,8 @@ server:
 
 spring:
   datasource:
-    #    url: jdbc:postgresql://localhost:3308/account
-    url: jdbc:postgresql://localhost:3307/Service_ProvideDB
+    url: jdbc:postgresql://localhost:3308/account
+#    url: jdbc:postgresql://localhost:3307/Service_ProvideDB
     username: postgres
     password: root123
 

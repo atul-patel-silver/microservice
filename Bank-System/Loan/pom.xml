@@ -71,9 +71,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
 
                 <configuration>
-                    <image>
-                        <name>atulpatel2001/loan:s4</name>
-                    </image>
+<!--                    <image>-->
+<!--                        <name>atulpatel2001/loan:s4</name>-->
+<!--                    </image>-->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -81,6 +81,23 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <to>
+                        <image>atulpatel2001/${project.artifactId}:s6</image>
+                        <auth>
+                            <username>atulpatel2001</username>
+                            <password>atul@2001</password>
+                        </auth>
+                    </to>
+                </configuration>
+
             </plugin>
         </plugins>
     </build>
