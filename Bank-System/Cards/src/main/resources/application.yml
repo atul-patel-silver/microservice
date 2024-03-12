@@ -17,5 +17,25 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  config:
+    import:
+      - "application-dev.yml"
+      - "application-prod.yml"
+  profiles:
+    active:
+      - "dev"
 
 
+
+
+build:
+  version: "3.0"
+
+cards:
+  message: "Welcome to SBIBank cards related local APIs "
+  contactDetails:
+    name: "ATUL PATEL - QA Lead"
+    email: "atul@gmail.com.com"
+  onCallSupport:
+    - (412) 419-3491
+    - (915) 382-1932

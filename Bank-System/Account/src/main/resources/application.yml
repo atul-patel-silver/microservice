@@ -15,16 +15,22 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
+  config:
+    import:
+      - "application-dev.yml"
+      - "application-prod.yml"
+  profiles:
+    active:
+      - prod
 
 build:
   version: '1.0'
 
 accounts:
-  message: "Welcome to EazyBank accounts related local APIs "
+  message: "Welcome to SBIBANK accounts related local APIs "
   contactDetails:
-    name: "John Doe - Developer"
-    email: "john@eazybank.com"
+    name: "ATUL PATEL - QA Lead"
+    email: "atul@gmail.com.com"
   onCallSupport:
     - (555) 555-1234
     - (555) 523-1345

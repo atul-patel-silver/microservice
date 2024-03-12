@@ -17,4 +17,24 @@ spring:
       hibernate:
         format_sql: true
 
+  config:
+    import:
+      - "application-dev.yml"
+      - "application-prod.yml"
+  profiles:
+    active:
+      - "dev"
+
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to SBIBank loans related local APIs "
+  contactDetails:
+    name: "ATUL PATEL - QA Lead"
+    email: "atul@gmail.com.com"
+  onCallSupport:
+    - (452) 456-2176
+    - (546) 764-8934
+
 

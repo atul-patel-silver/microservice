@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+build:
+  version: '3.0'
+
+accounts:
+  message: "Welcome to SbiBank accounts related local APIs "
+  contactDetails:
+    name: "John Doe - Developer"
+    email: "john@eazybank.com"
+  onCallSupport:
+    - (777) 555-1234
+    - (777) 523-1345
