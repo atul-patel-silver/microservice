@@ -1,0 +1,14 @@
+server:
+  port: 8071
+spring:
+  application:
+    name: CONFIG-SERVER
+
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+#          search-locations: classpath:/config
+          search-locations: file:///C:/Users/baps/Desktop/new-microservices/microservice/Bank-System/file-system-config-approach

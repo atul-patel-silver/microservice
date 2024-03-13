@@ -1,0 +1,15 @@
+build:
+  version: '1.0'
+
+accounts:
+  message: "Welcome to SBIBANK accounts related local APIs "
+  contactDetails:
+    name: "ATUL PATEL - QA Lead"
+    email: "atul@gmail.com.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345
+
+
+
+

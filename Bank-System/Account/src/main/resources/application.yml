@@ -15,26 +15,43 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  config:
-    import:
-      - "application-dev.yml"
-      - "application-prod.yml"
+  application:
+    name: Account
   profiles:
-    active:
-      - prod
-
-build:
-  version: '1.0'
-
-accounts:
-  message: "Welcome to SBIBANK accounts related local APIs "
-  contactDetails:
-    name: "ATUL PATEL - QA Lead"
-    email: "atul@gmail.com.com"
-  onCallSupport:
-    - (555) 555-1234
-    - (555) 523-1345
+    active: prod
+  config:
+    import: "optional:configserver:http://localhost:8071/"
 
 
+
+
+
+
+
+
+
+
+
+#  config:
+#    import:
+#      - "application-dev.yml"
+#      - "application-prod.yml"
+#  profiles:
+#    active:
+#      - prod
+
+#build:
+#  version: '1.0'
+#
+#accounts:
+#  message: "Welcome to SBIBANK accounts related local APIs "
+#  contactDetails:
+#    name: "ATUL PATEL - QA Lead"
+#    email: "atul@gmail.com.com"
+#  onCallSupport:
+#    - (555) 555-1234
+#    - (555) 523-1345
+#
+#
 
 

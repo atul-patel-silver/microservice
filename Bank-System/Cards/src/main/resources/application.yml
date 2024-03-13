@@ -1,5 +1,4 @@
 
-
 server:
   port: 8090
 
@@ -17,25 +16,29 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  config:
-    import:
-      - "application-dev.yml"
-      - "application-prod.yml"
+
   profiles:
-    active:
-      - "dev"
+    active: prod
+  application:
+    name: Cards
+  config:
+    import: "optional:configserver:http://localhost:8071/"
 
 
 
 
-build:
-  version: "3.0"
-
-cards:
-  message: "Welcome to SBIBank cards related local APIs "
-  contactDetails:
-    name: "ATUL PATEL - QA Lead"
-    email: "atul@gmail.com.com"
-  onCallSupport:
-    - (412) 419-3491
-    - (915) 382-1932
+#  config:
+#    import:
+#      - "application-dev.yml"
+#      - "application-prod.yml"
+#build:
+#  version: "3.0"
+#
+#cards:
+#  message: "Welcome to SBIBank cards related local APIs "
+#  contactDetails:
+#    name: "ATUL PATEL - QA Lead"
+#    email: "atul@gmail.com.com"
+#  onCallSupport:
+#    - (412) 419-3491
+#    - (915) 382-1932
