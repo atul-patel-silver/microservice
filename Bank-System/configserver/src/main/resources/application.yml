@@ -5,10 +5,40 @@ spring:
     name: CONFIG-SERVER
 
   profiles:
-    active: native
+    active: git
+  #    active: native
   cloud:
     config:
       server:
-        native:
+        git:
+          uri: https://github.com/atul-patel-silver/Bank-System-Configration.git
+          default-label: master
+          timeout: 5
+          clone-on-start: true  # try cloning of ht GitHub repo
+          force-pull: true
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+encrypt:
+  key: 45D81EC1EF61DF9AD8D3E5BB397F9
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+#        native:
 #          search-locations: classpath:/config
-          search-locations: file:///C:/Users/baps/Desktop/new-microservices/microservice/Bank-System/file-system-config-approach
+#          search-locations: file:///C:/Users/baps/Desktop/new-microservices/microservice/Bank-System/file-system-config-approach

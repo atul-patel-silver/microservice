@@ -34,7 +34,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 		)
 )
 @EnableConfigurationProperties(value = {CardsContactInfoDto.class})
-
 public class CardsApplication {
 
 	public static void main(String[] args) {
