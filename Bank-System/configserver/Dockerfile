@@ -3,7 +3,7 @@ FROM openjdk:17-jdk-slim
 
 #Information around who maintains the image
 MAINTAINER atul.com
-
+RUN apt-get update && apt-get install -y curl
 # Add the application's jar to the image
 COPY target/configserver-0.0.1-SNAPSHOT.jar configserver-0.0.1-SNAPSHOT.jar
 
