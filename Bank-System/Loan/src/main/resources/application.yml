@@ -1,11 +1,9 @@
-
 server:
   port: 8091
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:3308/account
-#    url: jdbc:postgresql://localhost:3307/Service_ProvideDB
+    url: jdbc:postgresql://localhost:5433/loandb
     username: postgres
     password: root123
 
@@ -23,11 +21,8 @@ spring:
 
   profiles:
     active: prod
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+
+
 
 
 
@@ -40,6 +35,11 @@ management:
 
 
 
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 
 
 

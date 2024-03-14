@@ -5,9 +5,7 @@ FROM openjdk:17-jdk-slim
 MAINTAINER atul.com
 
 # Add the application's jar to the image
-COPY target/Account-0.0.1-SNAPSHOT.jar Account-0.0.1-SNAPSHOT.jar
+COPY target/configserver-0.0.1-SNAPSHOT.jar configserver-0.0.1-SNAPSHOT.jar
 
 # execute the application
-ENTRYPOINT ["java", "-jar", "Account-0.0.1-SNAPSHOT.jar"]
-
-RUN apt-get update && apt-get install -y postgresql-client
+ENTRYPOINT ["java", "-jar", "configserver-0.0.1-SNAPSHOT.jar"]

@@ -4,8 +4,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:3308/account
-#    url: jdbc:postgresql://localhost:3307/Service_ProvideDB
+    url: jdbc:postgresql://localhost:5434/carddb
     username: postgres
     password: root123
 
@@ -23,11 +22,7 @@ spring:
     name: Cards
   config:
     import: "optional:configserver:http://localhost:8071/"
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+
 # actuator endpoint
 management:
   endpoints:
@@ -36,7 +31,11 @@ management:
         include: "*"
 
 
-
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 
 
 #  config:

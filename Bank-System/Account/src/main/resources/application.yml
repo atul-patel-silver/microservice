@@ -3,8 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:3308/account
-#    url: jdbc:postgresql://localhost:3307/Service_ProvideDB
+    url: jdbc:postgresql://localhost:5432/accountdb
     username: postgres
     password: root123
 
@@ -15,17 +14,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
   application:
     name: Account
   profiles:
     active: prod
   config:
     import: "optional:configserver:http://localhost:8071/"
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+
 
 
 # actuator endpoint
@@ -38,6 +34,13 @@ management:
 
 
 
+
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 
 
 
