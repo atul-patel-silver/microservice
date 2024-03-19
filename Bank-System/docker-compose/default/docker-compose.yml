@@ -69,6 +69,24 @@ services:
       file: common-config.yml
       service: microservice-base-config
 
+  eurekaserver:
+    image: "atulpatel2001/eurekaserver:s4"
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    healthcheck:
+      test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+
+
 
   accounts:
     image: "atulpatel2001/account:s4"
@@ -83,7 +101,8 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://accountdb:5432/accountdb"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
+
 
 
   loan:
@@ -101,7 +120,8 @@ services:
 
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
+
 
   cards:
     image: "atulpatel2001/cards:s4"
@@ -117,7 +137,8 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://cardsdb:5434/cardsdb"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
+
 
 
 networks:
