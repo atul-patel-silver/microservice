@@ -42,7 +42,24 @@ management:
     health:
       probes:
         enabled: true
+    shutdown:
+      enabled: true
 
+    info:
+      env:
+        enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+
+
+
+info:
+  app:
+    name: "configserver"
+    description: "SBI BANK Config Server"
+    version: "1.0.0"
 
 
 #        native:
