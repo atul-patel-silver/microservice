@@ -25,6 +25,14 @@ public class GatewayserverApplication {
     }
 
 
+    /**
+     *
+     * @param locatorBuilder
+     * @return  it is provide a custom route for api gateway and also counfigure resilance4j library in api gateway
+     *
+     * in circuitebreaker provide fallback controller after open circute
+     *
+     */
     @Bean
     public RouteLocator sbiBankLocator(RouteLocatorBuilder locatorBuilder) {
         return locatorBuilder.routes().route(
@@ -54,17 +62,34 @@ public class GatewayserverApplication {
 
     }
 
+
+    /**
+     *
+     *
+     * @return ==>method i return timeout duration for the response if server is not response in time throw a timeout exception
+     */
+
     @Bean
     public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
         return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
                 .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
                 .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
     }
+
+
+    /**
+     *   this methode put redis Rate Limiter Configration
+     * @return
+     */
     @Bean
     public RedisRateLimiter redisRateLimiter() {
         return new RedisRateLimiter(1, 1, 1);
     }
 
+    /**
+     * this methode provide header for ratelimiter
+     * @return
+     */
     @Bean
     KeyResolver userKeyResolver() {
         return exchange -> Mono.justOrEmpty(exchange.getRequest().getHeaders().getFirst("user"))

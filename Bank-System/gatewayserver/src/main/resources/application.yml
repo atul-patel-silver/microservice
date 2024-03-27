@@ -8,12 +8,15 @@ spring:
   cloud:
     gateway:
       httpclient:
+        # time out configration as yml file
         connect-timeout: 1000
         response-timeout: 5s
       discovery:
         locator:
           enabled: true
           lowerCaseServiceId: true
+
+  # redis server configration for rate limiter
   data:
     redis:
       connect-timeout: 2s
@@ -21,12 +24,16 @@ spring:
       port: 6379
       timeout: 1s
 
+
+#enable all actuator endpoint
 management:
   endpoints:
     web:
       exposure:
         include: "*"
         # all routing related to microservice
+
+# for all actuator property
   endpoint:
     gateway:
       enabled: true
@@ -41,6 +48,8 @@ info:
     description: "SBI BANK gateway server"
     version: "1.0.0"
 
+
+#
 logging:
   level:
     com:
