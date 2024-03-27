@@ -10,7 +10,7 @@ spring:
       httpclient:
         # time out configration as yml file
         connect-timeout: 1000
-        response-timeout: 5s
+        response-timeout: 10s
       discovery:
         locator:
           enabled: true
