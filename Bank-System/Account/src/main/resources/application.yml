@@ -47,6 +47,10 @@ management:
     shutdown:  # for eureka server
       enabled: true
 
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
 
   info:
     env:
@@ -110,6 +114,12 @@ resilience4j.ratelimiter:
       timeoutDuration: 1000
       limitRefreshPeriod: 5000
       limitForPeriod: 1
+
+
+
+
+
+
 #  rabbitmq:
 #    host: localhost
 #    port: 5672
