@@ -141,6 +141,7 @@ public class AccountController {
             )
     }
     )
+
     @PutMapping("/update")
     public ResponseEntity<ResponseDto> updateAccount(@Valid @RequestBody CustomerDto customerDto){
         boolean isUpdated = this.iAccountsService.updateAccount(customerDto);

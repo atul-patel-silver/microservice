@@ -2,10 +2,14 @@ server:
   port: 8080
 
 spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/accountdb
+#    username: postgres
+#    password: root123
   datasource:
-    url: jdbc:postgresql://localhost:5432/accountdb
-    username: postgres
-    password: root123
+    url: jdbc:postgresql://dpg-cob5rp779t8c73boims0-a.oregon-postgres.render.com/banksystemmicroservice
+    username: atul
+    password: CE9nBjCA20f5rJZCGwWl7QFZ4cYoTGfA
 
   jpa:
     show-sql: true
