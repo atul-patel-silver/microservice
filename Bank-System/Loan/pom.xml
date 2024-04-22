@@ -15,6 +15,7 @@
     <packaging>jar</packaging>
     <description>Loan</description>
     <properties>
+        <otelVersion>1.32.0</otelVersion>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
     </properties>
@@ -73,6 +74,12 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.opentelemetry.javaagent</groupId>
+            <artifactId>opentelemetry-javaagent</artifactId>
+            <version>${otelVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>

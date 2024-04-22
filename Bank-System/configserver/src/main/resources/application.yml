@@ -65,7 +65,9 @@ info:
     description: "SBI BANK Config Server"
     version: "1.0.0"
 
-
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 #        native:
 #          search-locations: classpath:/config
 #          search-locations: file:///C:/Users/baps/Desktop/new-microservices/microservice/Bank-System/file-system-config-approach

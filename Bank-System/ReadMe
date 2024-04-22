@@ -1,0 +1,38 @@
+Bank System using Spring Cloud
+
+
+    This project aims to create a distributed banking system using Spring Cloud microservices architecture. The system consists of several microservices communicating with each other, a central configuration service, service discovery using Eureka, API gateway for unified access, and Docker for containerization.
+
+    Microservices:
+    Account Microservice:
+    Responsible for creating user accounts and communicating with Card and Loan microservices.
+
+    Card Microservice:
+    Handles card-related functionalities such as creating a card using the account number.
+
+    Loan Microservice:
+    Manages loan-related operations such as creating a loan using the account number.
+
+    Components:
+
+    Config Service:
+    Provides configuration from a GitHub repository.
+
+
+    Eureka Server Microservice:
+    Acts as a central server to register and discover all microservices.
+
+
+    API Gateway Service:
+    Provides a single endpoint for accessing all services, routing requests to respective microservices.
+    Additional Features:
+
+    Google Jib Library:
+    Utilized for building Docker images efficiently for all microservices.
+
+    Docker-Compose File:
+    Compose file is provided to run all the microservice containers easily.
+
+    Observability and Monitoring:
+    Grafana Library is used for observability and monitoring.
+    Log monitoring, metrics, and tracing are implemented for better insights into system performance.
