@@ -24,6 +24,12 @@ spring:
       port: 6379
       timeout: 1s
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:7080/realms/master/protocol/openid-connect/certs"
+
 
 #enable all actuator endpoint
 management:
@@ -32,6 +38,8 @@ management:
       exposure:
         include: "*"
         # all routing related to microservice
+
+
 
 # for all actuator property
   endpoint:
@@ -60,6 +68,7 @@ logging:
       gateway:
         sever: DEBUG
 
+# for tracing
   pattern:
     level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
