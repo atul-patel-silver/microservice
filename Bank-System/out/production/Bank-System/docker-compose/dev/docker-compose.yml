@@ -1,0 +1,125 @@
+# in code if rabbit mq service is fully started after all config server started
+# in code if config server fully started after all service will be started
+services:
+  accountsdb:
+    container_name: accountdb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: accountdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+
+
+  loandb:
+    container_name: loandb
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: loandb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  cardsdb:
+    container_name: carddb
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_DB: carddb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  #  rabbit:
+  #    image: rabbitmq:3.13-management
+  #    hostname: rabbitmq
+  #    ports:
+  #      - "5672:5672"
+  #      - "15672:15672"
+  #    healthcheck:
+  #      test: rabbitmq-diagnostics check_port_connectivity
+  #      interval: 10s  # command should be executed every 10 seconds.
+  #      timeout: 5s   # This sets the timeout for each health check command to 5 seconds. If the command doesn't complete within this time frame, it will be considered a failure.
+  #      retries: 10  # This specifies that the health check command should be retried up to 10 times if it fails before reporting a failure.
+  #      start_period: 5s  # This indicates that the health check should wait for 5 seconds after the container is started before performing the first health check.
+  #    extends:
+  #      file: common-config.yml
+  #      service: network-deploy-service
+
+
+
+  configserver:
+    image: "atulpatel2001/configserver:s4"
+    container_name: configserver_ms
+    ports:
+      - "8071:8071"
+    #    depends_on:
+    #      rabbit:
+    #        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent localhost:8071/actuator/health/liveness | grep UP || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+
+  accounts:
+    image: "atulpatel2001/account:s4"
+    container_name: "account_ms"
+    ports:
+      - "8080:8080"
+    depends_on:
+      accountsdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "Account"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://accountdb:5432/accountdb"
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+
+  loan:
+    image: "atulpatel2001/loan:s4"
+    container_name: "loan_ms"
+    ports:
+      - "8090:8090"
+
+    depends_on:
+      loandb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "Loan"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://loandb:5433/loandb"
+
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+  cards:
+    image: "atulpatel2001/cards:s4"
+    container_name: "cards_ms"
+    ports:
+      - "8091:8091"
+
+    depends_on:
+      cardsdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "Cards"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://cardsdb:5434/cardsdb"
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+
+networks:
+  atulpatel2001:
+    driver: "bridge"

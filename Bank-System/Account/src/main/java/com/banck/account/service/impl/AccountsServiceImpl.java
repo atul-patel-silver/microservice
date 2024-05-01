@@ -2,6 +2,7 @@ package com.banck.account.service.impl;
 
 import com.banck.account.constant.AccountConstant;
 import com.banck.account.dto.AccountDto;
+import com.banck.account.dto.AccountsMsgDto;
 import com.banck.account.dto.CustomerDto;
 import com.banck.account.entity.Accounts;
 import com.banck.account.entity.Customer;
@@ -12,20 +13,26 @@ import com.banck.account.mapper.CustomerMapper;
 import com.banck.account.repo.AccountsRepository;
 import com.banck.account.repo.CustomerRepository;
 import com.banck.account.service.IAccountsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Stream;
+
 
 @Service
 public class AccountsServiceImpl implements IAccountsService {
+    private static final Logger log = LoggerFactory.getLogger(AccountsServiceImpl.class);
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private AccountsRepository accountsRepository;
+    @Autowired
+    private  StreamBridge streamBridge;
 
     /**
      * @param customerDto - CustomerDto Object store cutsomer and create a account
@@ -41,9 +48,19 @@ public class AccountsServiceImpl implements IAccountsService {
         }
         Customer savedCustomer = this.customerRepository.save(customer);
         Accounts newAccount = createNewAccount(savedCustomer);
-        this.accountsRepository.save(newAccount);
-
+        Accounts savedAccount = this.accountsRepository.save(newAccount);
+        sendCommunication(savedAccount, savedCustomer);
     }
+
+
+    private void sendCommunication(Accounts account, Customer customer) {
+        var accountsMsgDto = new AccountsMsgDto(account.getAccountNumber(), customer.getName(),
+                customer.getEmail(), customer.getMobileNumber());
+        log.info("Sending Communication request for the details: {}", accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        log.info("Is the Communication request successfully triggered ? : {}", result);
+    }
+
 
     /**
      * @param customer create a new Account

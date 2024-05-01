@@ -79,6 +79,8 @@ logging:
         card: DEBUG
   pattern:
     level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+
 #  rabbitmq:
 #    host: localhost
 #    port: 5672
